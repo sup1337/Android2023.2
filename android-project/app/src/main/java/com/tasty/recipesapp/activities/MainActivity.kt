@@ -1,7 +1,11 @@
-package com.tasty.recipesapp
+package com.tasty.recipesapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,5 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        val navView: BottomNavigationView = binding.bottomNavigationView
+
+        navView.setupWithNavController(navController)
     }
 }

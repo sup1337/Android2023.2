@@ -1,4 +1,4 @@
-package com.tasty.recipesapp
+package com.tasty.recipesapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
