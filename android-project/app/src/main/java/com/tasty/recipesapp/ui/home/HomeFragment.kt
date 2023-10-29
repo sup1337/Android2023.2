@@ -21,7 +21,6 @@ class HomeFragment : Fragment() {
         Log.d(TAG , "onCreate method called")
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
