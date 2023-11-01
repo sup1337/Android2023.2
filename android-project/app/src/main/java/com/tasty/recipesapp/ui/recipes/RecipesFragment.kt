@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 
 class RecipesFragment : Fragment() {
@@ -26,7 +28,9 @@ class RecipesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.button6.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipeDetailsFragment)
+        }
         return binding.root
     }
-
 }
