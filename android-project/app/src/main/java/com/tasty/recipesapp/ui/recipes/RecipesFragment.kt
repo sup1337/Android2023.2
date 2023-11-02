@@ -41,6 +41,7 @@ class RecipesFragment : Fragment() {
         val viewModel = ViewModelProvider(this)[RecipeListViewModel::class.java]
         viewModel.fetchInstructionData()
         viewModel.fetchInstructionsData()
+        viewModel.readInstructionsFromFile(requireContext())
     }
 
 }
