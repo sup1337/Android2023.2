@@ -13,15 +13,21 @@ import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 
 class RecipesFragment : Fragment() {
-    private lateinit var binding: FragmentRecipesBinding
 
-    companion object {
-        const val TAG = "RecipesFragment"
-    }
-
+    private val recipeViewModel : RecipeListViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate method called")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //requireActivity().title = "Recipes"
+        recipeViewModel.loadInstructionData(requireContext())
+        recipeViewModel.instructionModels.observe(viewLifecycleOwner) {  instructions ->
+            for (instructionModel in instructions) {
+                Log.d("Instructions", instructionModel.toString())
+            }
+        }
     }
 
     override fun onCreateView(
@@ -29,19 +35,6 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentRecipesBinding.inflate(inflater, container, false)
-        binding.button6.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_recipeDetailsFragment)
-        }
-        return binding.root
+        return inflater.inflate(R.layout.fragment_recipes, container, false)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this)[RecipeListViewModel::class.java]
-        viewModel.fetchInstructionData()
-        viewModel.fetchInstructionsData()
-        viewModel.readInstructionsFromFile(requireContext())
-    }
-
 }
