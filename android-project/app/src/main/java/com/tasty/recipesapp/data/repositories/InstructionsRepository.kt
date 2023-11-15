@@ -1,16 +1,29 @@
 package com.tasty.recipesapp.data.repositories
 
+
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.data.dtos.InstructionDTO
 import com.tasty.recipesapp.data.models.InstructionModel
+import com.tasty.recipesapp.data.models.InstructionTime
 import com.tasty.recipesapp.utils.Mapping.toModelList
 import org.json.JSONObject
 import java.io.IOException
 
-class InstructionsRepository : IGenericRepository<InstructionModel> {
+class InstructionRepository: IGenericRepository<InstructionDTO, InstructionModel> {
+    override fun InstructionDTO.toModel(): InstructionModel {
+        return InstructionModel(
+            id = this.id,
+            displayText = this.displayText,
+            time = InstructionTime(this.startTime, this.endTime)
+        )
+    }
+
+    override fun List<InstructionDTO>.toModelList(): List<InstructionModel> {
+        return this.map { it.toModel() }
+    }
 
     // later, context should be removed
     override fun getAll(context: Context): List<InstructionModel> {
@@ -18,7 +31,7 @@ class InstructionsRepository : IGenericRepository<InstructionModel> {
     }
 
     // In the future this should be deleted and data should be fetched from a public API
-    private fun readAll(context : Context): List<InstructionDTO> {
+    override fun readAll(context : Context): List<InstructionDTO> {
         val gson = Gson()
         var instructionList = listOf<InstructionDTO>()
         val assetManager = context.assets
@@ -41,7 +54,7 @@ class InstructionsRepository : IGenericRepository<InstructionModel> {
             instructionList = gson.fromJson(instructionsArray.toString(), type)
 
 
-            Log.i("GSON", instructionList.toString())
+            Log.i("GSON2", instructionList.toString())
             //instructions.value = instructionList
         } catch (e: IOException) {
             e.printStackTrace()
@@ -49,3 +62,5 @@ class InstructionsRepository : IGenericRepository<InstructionModel> {
         return instructionList
     }
 }
+
+
