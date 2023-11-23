@@ -48,9 +48,7 @@ class InstructionRepository: IGenericRepository<InstructionDTO, InstructionModel
             val instructionsArray = jsonObject.getJSONArray("instructions")
 
             val type = object : TypeToken<List<InstructionDTO>>() {}.type
-            //if it is simple
-            //val instructionList = gson.fromJson<List<InstructionDTO>>(jsonString, type)
-            // if with label
+
             instructionList = gson.fromJson(instructionsArray.toString(), type)
 
 
