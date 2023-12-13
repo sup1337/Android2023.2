@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/floating_action_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="96dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:contentDescription="@string/fab_add_new_recipe"-->
-<!--        app:srcCompat="@drawable/ic_add_outlined" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end"
+        android:contentDescription="Add new recipe"
+        app:srcCompat="@drawable/baseline_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

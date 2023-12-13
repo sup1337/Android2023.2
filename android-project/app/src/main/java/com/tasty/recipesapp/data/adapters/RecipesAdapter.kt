@@ -59,7 +59,7 @@ class RecipesAdapter(val onClickListener: OnItemClickListener) :
 
             binding.recipeName.text = recipeItem.name
             binding.recipeDescription.text = recipeItem.description
-            binding.recipeRating.text = recipeItem.userRatings.score.toString()
+            binding.recipeRating.text = recipeItem.userRatings?.score.toString()
         }
     }
 }

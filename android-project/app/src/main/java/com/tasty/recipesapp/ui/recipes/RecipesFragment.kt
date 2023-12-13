@@ -32,6 +32,10 @@ class RecipesFragment : Fragment(),OnItemClickListener {
     ): View? {
         binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_newRecipeFragment)
+        }
+
         return binding.root
     }
 

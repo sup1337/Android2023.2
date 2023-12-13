@@ -30,8 +30,7 @@ fun CreditDTO.toModel() = CreditModel(
 
 fun IngredientDTO.toModel() = IngredientModel(
     name = this.name,
-    displaySingular = this.displaySingular,
-    displayPlural = this.displayPlural,
+
 )
 
 fun InstructionDTO.toModel() = InstructionModel(

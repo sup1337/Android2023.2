@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.data.dtos.RecipeDTO
 import com.tasty.recipesapp.data.entitys.RecipeDao
+import com.tasty.recipesapp.data.entitys.RecipeEntity
 import com.tasty.recipesapp.data.models.RecipeModel
 import com.tasty.recipesapp.utils.*
 import org.json.JSONObject
@@ -37,6 +38,10 @@ class RecipeRepository(private val recipeDao: RecipeDao): IGenericRepository<Rec
 
     override fun getAll(context: Context): List<RecipeModel> {
         return readAll(context).toModelList()
+    }
+
+    suspend fun insertRecipe(recipe: RecipeEntity) {
+        return recipeDao.insertRecipe(recipe)
     }
 
     override fun readAll(context: Context): List<RecipeDTO> {
