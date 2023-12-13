@@ -17,15 +17,7 @@ import com.tasty.recipesapp.data.repositories.RecipeRepository
 import org.json.JSONObject
 
 // Itt lesznek az adatok tarolva
-class RecipesViewModel : ViewModel() {
-
-    private val _instructionModels = MutableLiveData<List<InstructionModel>>()
-    val instructionModels: LiveData<List<InstructionModel>> = _instructionModels
-
-    fun loadInstructionModel(context: Context) {
-        val data = RepositoryProvider.instructionsRepository.getAll(context);
-        _instructionModels.value = data
-    }
+object RecipesViewModel : ViewModel() {
 
     private val _recipeModels = MutableLiveData<List<RecipeModel>>()
     val recipeModels: LiveData<List<RecipeModel>> = _recipeModels

@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tasty.recipesapp.R
+import com.tasty.recipesapp.data.providers.RepositoryProvider
 import com.tasty.recipesapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBottomNavigation();
+        RepositoryProvider.initialize(applicationContext)
     }
     private fun setupBottomNavigation() {
 // When using FragmentContainerView the navController needs to be referenced using supportFragmentManager

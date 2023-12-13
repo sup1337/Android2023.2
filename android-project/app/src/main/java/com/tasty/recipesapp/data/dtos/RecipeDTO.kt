@@ -2,6 +2,7 @@ package com.tasty.recipesapp.data.dtos
 import com.google.gson.annotations.SerializedName
 
 data class RecipeDTO(
+    val id: Int,
     val name: String,
     val tags: List<TagDTO>,
     @SerializedName("thumbnail_url")

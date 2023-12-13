@@ -5,14 +5,17 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.data.dtos.RecipeDTO
+import com.tasty.recipesapp.data.entitys.RecipeDao
 import com.tasty.recipesapp.data.models.RecipeModel
 import com.tasty.recipesapp.utils.*
 import org.json.JSONObject
 import java.io.IOException
 
-class RecipeRepository: IGenericRepository<RecipeDTO, RecipeModel> {
+class RecipeRepository(private val recipeDao: RecipeDao): IGenericRepository<RecipeDTO, RecipeModel> {
+
     override fun RecipeDTO.toModel(): RecipeModel {
         return RecipeModel(
+            id = this.id,
             name = this.name,
             description = this.description,
             thumbnailUrl = this.thumbnailUrl,
