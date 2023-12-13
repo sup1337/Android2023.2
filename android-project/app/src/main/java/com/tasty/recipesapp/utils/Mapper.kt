@@ -67,6 +67,7 @@ fun UnitDTO.toModel() = UnitModel(
 fun UserRatingDTO.toModel() = UserRatingModel(
     countNegative = this.countNegative,
     countPositive = this.countPositive,
+    score = this.score,
 )
 
 fun MeasurementDTO.toModel() = MeasurementModel(

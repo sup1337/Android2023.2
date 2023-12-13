@@ -41,7 +41,7 @@ class RecipeRepository: IGenericRepository<RecipeDTO, RecipeModel> {
         var recipeList = listOf<RecipeDTO>()
         val assetManager = context.assets
         try {
-            val inputStream = assetManager.open("recipes.json")
+            val inputStream = assetManager.open("recipes_all.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)

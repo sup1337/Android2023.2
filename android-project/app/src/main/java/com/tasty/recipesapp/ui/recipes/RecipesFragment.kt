@@ -34,7 +34,7 @@ class RecipesFragment : Fragment() {
         recipeViewModel.loadRecipeModel(requireContext())
         recipeViewModel.recipeModels.observe(viewLifecycleOwner) { recipes ->
             for (recipeModel in recipes) {
-                Log.d("Recipes", recipeModel.toString())
+                Log.d("Sample", recipeModel.toString())
             }
         }
     }
