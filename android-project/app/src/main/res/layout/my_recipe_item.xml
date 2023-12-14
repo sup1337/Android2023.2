@@ -58,44 +58,31 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="16dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rating: "
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:attr/textColorSecondary" />
-
-                    <TextView
-                        android:id="@+id/recipeRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:attr/textColorSecondary" />
-
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/detailsButton"
                     style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="116dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="Details" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addToWishlistButton"
+                    android:id="@+id/deleteButton"
                     style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="116dp"
                     android:layout_height="wrap_content"
-                    android:text="Add to wishlist" />
+                    android:layout_marginEnd="8dp"
+                    android:text="Delete" />
             </LinearLayout>
 
         </LinearLayout>

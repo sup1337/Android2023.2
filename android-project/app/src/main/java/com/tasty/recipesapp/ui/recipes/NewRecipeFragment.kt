@@ -59,7 +59,7 @@ class NewRecipeFragment : Fragment() {
     private fun addNewIngredient() {
         val newTextField = TextInputEditText(requireContext())
 
-        newTextField.hint = "#${ingredients.size + 1} Ingredient"
+        newTextField.hint = "${ingredients.size + 1}. Ingredient"
 
         newTextField.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
@@ -74,7 +74,7 @@ class NewRecipeFragment : Fragment() {
     private fun addNewInstruction() {
         val newTextField = TextInputEditText(requireContext())
 
-        newTextField.hint = "#${instructions.size + 1} Instruction"
+        newTextField.hint = "${instructions.size + 1}. Instruction"
 
         newTextField.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
@@ -106,7 +106,7 @@ class NewRecipeFragment : Fragment() {
             if(ing.text.toString().isNotEmpty()) {
 
                 val ingredient = IngredientModel(ing.text.toString());
-                components.add(ComponentModel(ing.text.toString(), ingredient, null))
+                components.add(ComponentModel(null, ingredient, null))
             }
         }
 

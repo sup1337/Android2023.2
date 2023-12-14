@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.data.dtos.InstructionDTO
@@ -14,6 +15,7 @@ import com.tasty.recipesapp.data.models.RecipeModel
 import java.io.IOException
 import com.tasty.recipesapp.data.dtos.RecipeDTO
 import com.tasty.recipesapp.data.repositories.RecipeRepository
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 // Itt lesznek az adatok tarolva
@@ -23,8 +25,14 @@ object RecipesViewModel : ViewModel() {
     val recipeModels: LiveData<List<RecipeModel>> = _recipeModels
 
     fun loadRecipeModel(context: Context) {
-        val data = RepositoryProvider.recipeRepository.getAll(context);
-        _recipeModels.value = data
+
+        viewModelScope.launch {
+            val data = RepositoryProvider.recipeRepository.getAll(context);
+            _recipeModels.postValue(data)
+        }
+    }
+    fun getRecipeById(id: Int) : RecipeModel?{
+        return _recipeModels.value?.find { it -> it.id == id }
     }
 
 }

@@ -44,6 +44,21 @@ class RecipeRepository(private val recipeDao: RecipeDao): IGenericRepository<Rec
         return recipeDao.insertRecipe(recipe)
     }
 
+    suspend fun getFromDb(): List<RecipeModel> {
+        val data = recipeDao.getAllRecipes()
+        return data.map { entityToModel(it) }
+    }
+
+    suspend fun deleteRecipe(id: Long) {
+        return recipeDao.deleteRecipeById(id)
+    }
+
+    private fun entityToModel(entity: RecipeEntity): RecipeModel {
+        val recipe = Gson().fromJson(entity.json, RecipeModel::class.java)
+        recipe.id = entity.internalId.toInt()
+        return recipe
+    }
+
     override fun readAll(context: Context): List<RecipeDTO> {
         val gson = Gson()
         var recipeList = listOf<RecipeDTO>()
