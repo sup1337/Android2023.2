@@ -11,7 +11,6 @@ import com.tasty.recipesapp.data.models.RecipeModel
 import com.tasty.recipesapp.utils.*
 import org.json.JSONObject
 import java.io.IOException
-
 class RecipeRepository(private val recipeDao: RecipeDao): IGenericRepository<RecipeDTO, RecipeModel> {
 
     override fun RecipeDTO.toModel(): RecipeModel {
