@@ -34,5 +34,23 @@ object RecipesViewModel : ViewModel() {
     fun getRecipeById(id: Int) : RecipeModel?{
         return _recipeModels.value?.find { it -> it.id == id }
     }
+    fun getRecipesFromApi(filter: Filter? = null, search: String? = null, sort: Sort? = null, order: Order? = null) {
+        viewModelScope.launch {
+
+            var tags: String? = null
+
+            tags = when (filter) {
+                Filter.SEAFOOD -> "seafood"
+                Filter.EASY -> "easy"
+                else -> {
+                    null
+                }
+            }
+
+            val data = RepositoryProvider.recipeRepository.getRecipesFromApi("0", "20", tags, search, sort, order)
+            _recipeModels.postValue(data)
+        }
+    }
+
 
 }

@@ -13,6 +13,8 @@ interface RecipeService {
     suspend fun getRecipes(
         @Query("from") from: String,
         @Query("size") size: String,
-        @Query("tags") tags: String? = null
+        @Query("tags") tags: String? = null,
+        @Query("q") search: String? = null
     ): RecipeResponse
+
 }

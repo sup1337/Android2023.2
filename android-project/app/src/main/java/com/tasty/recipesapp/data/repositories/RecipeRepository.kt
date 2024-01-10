@@ -8,10 +8,15 @@ import com.tasty.recipesapp.data.dtos.RecipeDTO
 import com.tasty.recipesapp.data.entitys.RecipeDao
 import com.tasty.recipesapp.data.entitys.RecipeEntity
 import com.tasty.recipesapp.data.models.RecipeModel
+import com.tasty.recipesapp.data.service.RecipeApiClient
+import com.tasty.recipesapp.ui.recipes.Order
+import com.tasty.recipesapp.ui.recipes.Sort
 import com.tasty.recipesapp.utils.*
 import org.json.JSONObject
 import java.io.IOException
 class RecipeRepository(private val recipeDao: RecipeDao): IGenericRepository<RecipeDTO, RecipeModel> {
+    private val apiClient = RecipeApiClient()
+
 
     override fun RecipeDTO.toModel(): RecipeModel {
         return RecipeModel(
@@ -88,4 +93,26 @@ class RecipeRepository(private val recipeDao: RecipeDao): IGenericRepository<Rec
         }
         return recipeList
     }
+    suspend fun getRecipesFromApi(from: String, size: String, tags: String? = null, search: String? = null, sort: Sort? = null, order: Order? = null): List<RecipeModel> {
+        var data = apiClient.getRecipes(from, size, tags, search).results.toModelList()
+
+        if (sort != null && order != null) {
+
+            if (sort == Sort.NAME) {
+                data = data.sortedBy { it -> it.name }
+            }
+
+            if (sort == Sort.RATING) {
+                data = data.sortedBy { it -> it.userRatings?.score }
+            }
+
+            if (order == Order.DESC) {
+                data = data.reversed()
+            }
+        }
+
+        return data
+    }
+
+
 }

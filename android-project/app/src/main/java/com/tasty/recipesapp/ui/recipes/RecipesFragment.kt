@@ -22,6 +22,10 @@ class RecipesFragment : Fragment(),OnItemClickListener {
     private lateinit var binding: FragmentRecipesBinding
     private val recipeViewModel: RecipesViewModel by viewModels()
     private val adapter: RecipesAdapter = RecipesAdapter(this)
+    private var sort: Sort? = null
+    private var order: Order? = null
+    private var filter: Filter? = null
+    private var query: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,12 @@ class RecipesFragment : Fragment(),OnItemClickListener {
 
         recipesRecyclerView.adapter = adapter
 
-        recipeViewModel.loadRecipeModel(requireContext())
+        binding.searchButton.setOnClickListener {
+            onSearchButtonClick()
+        }
+
+        //recipeViewModel.loadRecipeModel(requireContext())
+        recipeViewModel.getRecipesFromApi()
 
         recipeViewModel.recipeModels.observe(viewLifecycleOwner) { recipes ->
             adapter.setData(recipes)
@@ -64,6 +73,33 @@ class RecipesFragment : Fragment(),OnItemClickListener {
         findNavController()
             .navigate(R.id.action_recipesFragment_to_recipeDetailsFragment,
                 bundleOf("recipeId" to recipe.id))
+    }
+    private fun onSearchButtonClick() {
+        val filterGroup = binding.filterGroup
+        val sortGroup = binding.sortGroup
+        val orderGroup = binding.orderGroup
+
+        when (filterGroup.checkedRadioButtonId) {
+            binding.radioButton2.id -> filter = Filter.SEAFOOD
+            binding.radioButton1.id -> filter = Filter.EASY
+        }
+
+        when (sortGroup.checkedRadioButtonId) {
+            binding.sortOption1.id -> sort = Sort.NAME
+            binding.sortOption2.id -> sort = Sort.RATING
+        }
+
+        when (orderGroup.checkedRadioButtonId) {
+            binding.orderASC.id -> order = Order.ASC
+            binding.orderDESC.id -> order = Order.DESC
+        }
+
+        if (binding.searchBar.query.isNotEmpty()) {
+            query = binding.searchBar.query.toString()
+        }
+
+        recipeViewModel.getRecipesFromApi(filter, query, sort, order)
+
     }
 
 }
